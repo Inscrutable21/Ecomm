@@ -1,17 +1,14 @@
+// pages/api/auth/[...nextauth].js 
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import prisma from '../../../../src/utils/db';
-import { verifyPassword } from '../../../../src/utils/auth/password';
+import prisma from '@/utils/db';
+import { verifyPassword } from '@/utils/auth/password';
 
-export default NextAuth({
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
-  },
-  jwt: {
-    secret: process.env.NEXTAUTH_SECRET,
-    encryption: false, // Critical for disabling encryption
   },
   providers: [
     CredentialsProvider({
@@ -21,28 +18,29 @@ export default NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        try {
-          const admin = await prisma.admin.findUnique({
-            where: { email: credentials.email }
-          });
-
-          if (!admin) return null;
-          
-          const isValid = await verifyPassword(
-            credentials.password,
-            admin.password
-          );
-
-          return isValid ? { 
-            id: admin.id.toString(), // Ensure ID is string
-            email: admin.email,
-            role: 'admin' 
-          } : null;
-
-        } catch (error) {
-          console.error('Authentication error:', error);
-          return null;
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error('Please enter both email and password');
         }
+
+        const admin = await prisma.admin.findUnique({
+          where: { email: credentials.email }
+        });
+
+        if (!admin) {
+          throw new Error('Invalid credentials');
+        }
+
+        const isValid = await verifyPassword(credentials.password, admin.password);
+
+        if (!isValid) {
+          throw new Error('Invalid credentials');
+        }
+
+        return {
+          id: admin.id,
+          email: admin.email,
+          role: 'admin'
+        };
       }
     })
   ],
@@ -55,8 +53,10 @@ export default NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.user.id = token.id;
-      session.user.role = token.role;
+      if (session?.user) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+      }
       return session;
     }
   },
@@ -64,4 +64,6 @@ export default NextAuth({
     signIn: '/admin/login',
     error: '/admin/login'
   }
-});
+};
+
+export default NextAuth(authOptions);
