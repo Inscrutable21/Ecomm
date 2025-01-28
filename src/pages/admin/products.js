@@ -1,10 +1,11 @@
 // src/pages/admin/products.js
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Layout from '@/components/Admin/Layout';
 import ProductForm from '@/components/Admin/ProductForm';
 import ProtectedRoute from '@/components/Admin/Auth/ProtectedRoute';
 
+// Export the wrapped component as the default export
 export default function ProductsPage() {
   return (
     <ProtectedRoute>
@@ -15,6 +16,7 @@ export default function ProductsPage() {
   );
 }
 
+// Main Products component
 function Products() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -136,11 +138,15 @@ function Products() {
             {products.map((product) => (
               <tr key={product.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-16 w-16 object-cover rounded"
-                  />
+                  <div className="relative h-16 w-16">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="64px"
+                      className="object-cover rounded"
+                    />
+                  </div>
                 </td>
                 <td className="px-6 py-4">{product.name}</td>
                 <td className="px-6 py-4">${product.price.toFixed(2)}</td>

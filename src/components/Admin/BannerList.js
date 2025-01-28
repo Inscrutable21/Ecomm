@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import {
   Table,
   TableBody,
@@ -29,11 +30,15 @@ export default function BannerList({ banners, onDelete, onEdit }) {
           {banners.map((banner) => (
             <TableRow key={banner.id}>
               <TableCell>
-                <img
-                  src={banner.image}
-                  alt="Banner"
-                  style={{ width: '100px', height: 'auto' }}
-                />
+                <div style={{ position: 'relative', width: '100px', height: '100px' }}>
+                  <Image
+                    src={banner.image}
+                    alt="Banner"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="100px"
+                  />
+                </div>
               </TableCell>
               <TableCell>
                 <IconButton onClick={() => onEdit(banner)} color="primary">

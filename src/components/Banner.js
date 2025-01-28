@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -80,7 +81,7 @@ const Banner = () => {
             >
               {/* Image wrapper with proper positioning */}
               <div className="relative w-full h-full overflow-hidden">
-                <img
+                <Image
                   src={banner.image}
                   alt={banner.title || 'Banner image'}
                   className="absolute w-full h-full object-cover"

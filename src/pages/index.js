@@ -114,7 +114,7 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-600 italic mb-6">"Great products and fast delivery! The customer service team was incredibly helpful and responsive."</p>
+                <p className="text-gray-600 italic mb-6">&quot;Great products and fast delivery! The customer service team was incredibly helpful and responsive.&quot;</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
                     <span className="text-blue-600 font-semibold">JD</span>
@@ -134,7 +134,7 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-600 italic mb-6">"Amazing service! The quality of products exceeded my expectations. Highly recommended to everyone!"</p>
+                <p className="text-gray-600 italic mb-6">&quot;Amazing service! The quality of products exceeded my expectations. Highly recommended to everyone!&quot;</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
                     <span className="text-purple-600 font-semibold">JS</span>
@@ -154,7 +154,7 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
-                <p className="text-gray-600 italic mb-6">"The best shopping experience ever! Quick delivery and excellent product quality. Will definitely shop again!"</p>
+                <p className="text-gray-600 italic mb-6">&quot;The best shopping experience ever! Quick delivery and excellent product quality. Will definitely shop again!&quot;</p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
                     <span className="text-green-600 font-semibold">AJ</span>
