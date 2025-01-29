@@ -81,16 +81,18 @@ const Banner = () => {
             >
               {/* Image wrapper with proper positioning */}
               <div className="relative w-full h-full overflow-hidden">
-                <Image
-                  src={banner.image}
-                  alt={banner.title || 'Banner image'}
-                  className="absolute w-full h-full object-cover"
-                  style={{
-                    objectPosition: '50% 50%', // Center both horizontally and vertically
-                    transform: 'scale(1.01)', // Slight scale to prevent white edges
-                  }}
-                  loading="eager"
-                />
+              <Image
+  src={banner.image}
+  alt={banner.title || 'Banner image'}
+  width={1920}  // Specify appropriate width
+  height={1080} // Specify appropriate height
+  className="w-full h-full object-cover"
+  style={{
+    objectPosition: '50% 50%',
+    transform: 'scale(1.01)',
+  }}
+  priority
+/>
                 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent">

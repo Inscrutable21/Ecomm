@@ -9,7 +9,8 @@ const ProductCard = ({ product }) => {
       <Image
   src={product.image}
   alt={product.name}
-  fill
+  width={400}  // specify appropriate width
+  height={300} // specify appropriate height
   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 />
